@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "this is a job hunting website",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon -r dotenv/config src/index.js"
   },
   "keywords": [
     "javascript",
@@ -13,5 +15,9 @@
     "anuj"
   ],
   "author": "anujmumbaikar",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.2"
+  }
 }
