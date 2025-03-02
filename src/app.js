@@ -14,8 +14,11 @@ app.use(express.static('public'))
 
 
 import userRouter from "./routes/user.routes.js"
-import companyRouter from "./routes/company.route.js"
+import companyRouter from "./routes/company.routes.js"
+import jobRouter from "./routes/job.routes.js"
+
 app.use("/api/v1/users",userRouter)
 app.use("/api/v1/companies",companyRouter)
+app.use("/api/v1/jobs",jobRouter)
 
 export {app}

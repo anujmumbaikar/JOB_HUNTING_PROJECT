@@ -17,7 +17,7 @@ const registerCompany = asyncHandler(async (req, res) => {
         companyName,
         createdBy: req.user._id,
     });
-    const createdCompany = await Company.findById(company._id).populate("createdBy", "fullname email");
+    const createdCompany = await Company.findById(company._id).populate("createdBy","fullname email");
     //what populate in general do?
     //populate is used to get the data of the referenced field
     //here createdBy is a referenced field
@@ -41,7 +41,7 @@ const getCompany = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, companies, "Companies fetched successfully"));
 })
 const getCompanyById = asyncHandler(async (req, res) => {
-    const { companyId } = req.params;
+    const companyId  = req.params.id;  // this is a string so it will not accept {companyId} directly
     if (!companyId) {
         throw new ApiError(400, "Company id is required");
     }
