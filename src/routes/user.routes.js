@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { register,login,logout,updateProfile } from "../controllers/user.controller.js"
+import { registerCompany,getCompany } from "../controllers/company.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router = Router()
 router.route("/register").post(register)
