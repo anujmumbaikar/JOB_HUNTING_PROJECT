@@ -24,7 +24,7 @@ const createJob = asyncHandler(async (req, res) => {
     const createdJob = await Job.findById(job._id).populate({
         path: 'createdBy',
         select: '-password -refreshToken' // Exclude sensitive fields
-    }).populate("company"); // Populate all fields
+    }).populate("company","companyName description location website"); // Populate all fields
     if(!createdJob){
         throw new ApiError(500, 'Job not created');
     }

@@ -34,7 +34,7 @@ const getCompany = asyncHandler(async (req, res) => {
     if(!user){
         throw new ApiError(400, 'User not found');
     }
-    const companies = await Company.find({createdBy:user._id});
+    const companies = await Company.find({createdBy:user._id}).populate('createdBy','fullname email');
     if (companies.length === 0) {
         throw new ApiError(404, "No companies found for this user");
     }
@@ -45,7 +45,7 @@ const getCompanyById = asyncHandler(async (req, res) => {
     if (!companyId) {
         throw new ApiError(400, "Company id is required");
     }
-    const company = await Company.findById(companyId);
+    const company = await Company.findById(companyId).populate("createdBy","fullname email");
     if (!company) {
         throw new ApiError(404, "Company not found");
     }

@@ -47,9 +47,12 @@ const register = asyncHandler(async(req,res)=>{
 })
 
 const login = asyncHandler(async (req,res)=>{
-    const {email,password,phoneNumber} = req.body;
+    const {email,password,phoneNumber,role} = req.body;
     if(!email && !phoneNumber){
         throw new ApiError(400,"Pls enter email or phone number")
+    }
+    if(!role){
+        throw new ApiError(400,"Pls enter role")
     }
     if(!password){
         throw new ApiError(400,"Pls enter password")
@@ -63,6 +66,9 @@ const login = asyncHandler(async (req,res)=>{
     const isPasswordValid = await user.isPasswordCorrect(password)
     if(!isPasswordValid){
         throw new ApiError(400,"password is incorrect")
+    }
+    if(role !== user.role){
+        throw new ApiError(400,"Account doesnt exist for this role")
     }
     const {accessToken,refreshToken} = await generateAccessAndRefreshTokens(user._id)
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")

@@ -45,7 +45,7 @@ const getAppliedJobs = asyncHandler(async (req, res) => {
         populate:{
             path:'company',
         }
-    });
+    }).populate('applicant','name email');
     if (applications.length === 0) {
         throw new ApiError(404, "No applications found");
     }
@@ -59,6 +59,7 @@ const getApplicants = asyncHandler(async (req, res) => {
         sort:{createdAt:-1}, //sort in asending order
         populate:{
             path:'applicant',
+            select:'fullname email'
         }
     })
     if (!job) {
