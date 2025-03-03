@@ -6,14 +6,14 @@ const applicationSchema = new mongoose.Schema({
         ref:'Job',
         required:true
     },
-    applicant:{
+    applicant:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true
-    },
+    }],
     status:{
         type:String,
-        enum:['applied','shortlisted','accepted','rejected'],
+        enum:['applied','shortlisted','accepted','rejected','pending'],
         default:'pending'
     }
 },{timestamps:true});
